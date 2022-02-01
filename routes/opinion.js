@@ -4,8 +4,8 @@ const Opinion = require("../models/Opinion");
 
 router.get("/get", async (req, res) => {
   try {
-    const Opinions = await Opinion.find();
-    res.status(200).json(Opinions);
+    const opinions = await Opinion.find();
+    res.status(200).json(opinions);
   } catch (err) {
     res.status(500).json({ message: "no Opinions in database" });
   }
@@ -15,18 +15,18 @@ router.get("/get/:id", async (req, res) => {
   const id = req.params.id;
 
   try {
-    const Opinion = await Opinion.findById(id);
-    res.status(200).json(Opinion);
+    const opinions = await Opinion.findById(id);
+    res.status(200).json(opinions);
   } catch (err) {
     res.status(500).json({ message: "Opinion with that id doesnt exists" });
   }
 });
 
 router.post("/createNew", async (req, res) => {
-  const Opinion = new Opinion(req.body);
+  const opinions = new Opinion(req.body);
 
   try {
-    await Opinion.save();
+    await opinions.save();
     res.status(200).json({ message: "Opinion created" });
   } catch (err) {
     res.status(500).json({ message: "cannot create Opinion" });

@@ -12,13 +12,14 @@ router.get("/get", async (req, res) => {
 });
 
 router.post("/createNew", async (req, res) => {
-  const Currency = new Currency(req.body);
+  const currency = new Currency(req.body);
 
   try {
-    await Currency.save();
+    await currency.save();
     res.status(200).json({ message: "Currency created" });
   } catch (err) {
-    res.status(500).json({ message: "cannot create Currency" });
+    console.log(err);
+    res.status(500).json({ message: "cannot create currency" });
   }
 });
 
@@ -37,7 +38,10 @@ router.patch("/update/:id", async (req, res) => {
   const id = req.params.id;
 
   try {
-    const updatedCurrency = await Currency.updateOne({ _id: id }, { $set: req.body });
+    const updatedCurrency = await Currency.updateOne(
+      { _id: id },
+      { $set: req.body }
+    );
     res.status(200).json({ message: "Currency updated" });
   } catch (err) {
     res.status(500).json({ message: "cannot update Currency" });

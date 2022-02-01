@@ -4,8 +4,8 @@ const Offer = require("../models/Offer");
 
 router.get("/get", async (req, res) => {
   try {
-    const Offers = await Offer.find();
-    res.status(200).json(Offers);
+    const offers = await Offer.find();
+    res.status(200).json(offers);
   } catch (err) {
     res.status(500).json({ message: "no Offers in database" });
   }
@@ -15,20 +15,22 @@ router.get("/get/:id", async (req, res) => {
   const id = req.params.id;
 
   try {
-    const Offer = await Offer.findById(id);
-    res.status(200).json(Offer);
+    const offer = await Offer.findById(id);
+    res.status(200).json(offer);
   } catch (err) {
     res.status(500).json({ message: "Offer with that id doesnt exists" });
   }
 });
 
 router.post("/createNew", async (req, res) => {
-  const Offer = new Offer(req.body);
+  console.log(req.body);
+  const offer = new Offer(req.body);
 
   try {
-    await Offer.save();
+    await offer.save();
     res.status(200).json({ message: "Offer created" });
   } catch (err) {
+    console.log(err);
     res.status(500).json({ message: "cannot create Offer" });
   }
 });

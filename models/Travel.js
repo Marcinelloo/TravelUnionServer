@@ -7,6 +7,7 @@ const TravelSchema = mongoose.Schema({
   price: { type: Number, required: true },
   residance: { type: Number, required: true },
   travelDays: [{ type: String, required: true }],
+  city: { type: mongoose.SchemaTypes.ObjectId, required: true },
 });
 
 module.exports = mongoose.model("Travel", TravelSchema);

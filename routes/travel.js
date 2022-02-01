@@ -4,8 +4,8 @@ const Travel = require("../models/Travel");
 
 router.get("/get", async (req, res) => {
   try {
-    const Travels = await Travel.find();
-    res.status(200).json(Travels);
+    const travels = await Travel.find();
+    res.status(200).json(travels);
   } catch (err) {
     res.status(500).json({ message: "no Travels in database" });
   }
@@ -15,18 +15,18 @@ router.get("/get/:id", async (req, res) => {
   const id = req.params.id;
 
   try {
-    const Travel = await Travel.findById(id);
-    res.status(200).json(Travel);
+    const travels = await Travel.findById(id);
+    res.status(200).json(travels);
   } catch (err) {
     res.status(500).json({ message: "Travel with that id doesnt exists" });
   }
 });
 
 router.post("/createNew", async (req, res) => {
-  const Travel = new Travel(req.body);
+  const travel = new Travel(req.body);
 
   try {
-    await Travel.save();
+    await travel.save();
     res.status(200).json({ message: "Travel created" });
   } catch (err) {
     res.status(500).json({ message: "cannot create Travel" });
