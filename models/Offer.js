@@ -4,6 +4,7 @@ const OfferSchema = mongoose.Schema({
   hotelType: { type: String, required: true },
   hotelName: { type: String, required: true },
   city: { type: mongoose.SchemaTypes.ObjectId },
+  country: { type: mongoose.SchemaTypes.ObjectId },
   stars: { type: Number, required: true },
   photo: [{ type: String }],
   averageRate: { type: Number, default: 0 },

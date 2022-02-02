@@ -11,6 +11,17 @@ router.get("/get", async (req, res) => {
   }
 });
 
+router.get("/get/:countryName", async (req, res) => {
+  const countryName = req.params.countryName;
+
+  try {
+    const countries = await Country.where("name").equals(countryName);
+    res.status(200).json(countries);
+  } catch (err) {
+    res.status(500).json({ message: "no countries in database" });
+  }
+});
+
 router.post("/createNew", async (req, res) => {
   const country = new Country(req.body);
 

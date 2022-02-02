@@ -22,6 +22,35 @@ router.get("/get/:id", async (req, res) => {
   }
 });
 
+router.get("/get/byCountry/:id", async (req, res) => {
+  const id = req.params.id;
+
+  try {
+    const offer = await Offer.where("country").equals(id);
+    res.status(200).json(offer);
+  } catch (err) {
+    res.status(500).json({ message: "Offer with that id doesnt exists" });
+  }
+});
+
+router.get("/getOurChoice", async (req, res) => {
+  try {
+    const offer = await Offer.where("price").gt(1000).limit(3);
+    res.status(200).json(offer);
+  } catch (err) {
+    res.status(500).json({ message: "Offer with that id doesnt exists" });
+  }
+});
+
+router.get("/getTheBest", async (req, res) => {
+  try {
+    const offer = await Offer.where("stars").equals(5).limit(3);
+    res.status(200).json(offer);
+  } catch (err) {
+    res.status(500).json({ message: "Offer with that id doesnt exists" });
+  }
+});
+
 router.post("/createNew", async (req, res) => {
   console.log(req.body);
   const offer = new Offer(req.body);
